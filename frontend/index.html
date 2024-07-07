@@ -7,14 +7,25 @@
         <h1>
             WebSocket Mouse Position
         </h1>
-        <div id="position">
+        <div id="events">
         </div>
         <script lang="js">
-            const ws = new WebSocket("ws://localhost:8000/ws");
+            const ws = new WebSocket("ws://" + location.host + "/ws");
+            console.log("Connection done!");
+        
             ws.onmessage = function(event) {
-                const positionDiv = document.getElementById('position');
-                positionDiv.innerText = "Mouse Position: " + event.data;
-            }
+                console.log("Having a message");
+                const eventDiv = document.getElementById('events');
+                const data = JSON.parse(event.data);
+                if (data.type === 'move') {
+                    eventDiv.innerHTML = 'Mouse moved to (' + data.x + ', ' + data.y + ')';
+                } else if (data.type === 'click') {
+                    const action = data.pressed ? 'pressed' : 'released';
+                    eventDiv.innerHTML = 'Mouse ' + data.button + ' ' + action + ' at (' + data.x + ', ' + data.y + ')';
+                } else if (data.type === 'scroll') {
+                    eventDiv.innerHTML = 'Mouse scrolled at (' + data.x + ', ' + data.y + ') with delta (' + data.dx + ', ' + data.dy + ')';
+                }
+            };
         </script>
     </body>
 </html>
