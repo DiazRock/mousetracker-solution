@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket Example</title>
+    </head>
+    <body>
+        <h1>
+            WebSocket Mouse Position
+        </h1>
+        <div id="position">
+        </div>
+        <script lang="js">
+            const ws = new WebSocket("ws://localhost:8000/ws");
+            ws.onmessage = function(event) {
+                const positionDiv = document.getElementById('position');
+                positionDiv.innerText = "Mouse Position: " + event.data;
+            }
+        </script>
+    </body>
+</html>
