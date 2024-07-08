@@ -9,7 +9,11 @@
         </h1>
         <div id="events">
         </div>
-        <script lang="js" src="main.js">
+        <div id="movementEvent">
+        </div>
+        <div id="clickEvent">
+        </div>
+        <script lang="js">
             const ws = new WebSocket("ws://" + location.host + "/ws");
             console.log("Connection done!");
         
@@ -19,13 +23,13 @@
                 const data = JSON.parse(event.data);
                 if (data.type === 'move') {
                     console.log("Movement message");
-                    eventDiv.innerHTML = 'Mouse moved to (' + data.x + ', ' + data.y + ')';
+                    const movementDiv = document.getElementById('movementEvent');
+                    movementDiv.innerHTML = 'Mouse moved to (' + data.x + ', ' + data.y + ')';
                 } else if (data.type === 'click') {
                     console.log("Click message");
+                    const clickEvent = document.getElementById('clickEvent');
                     const action = data.pressed ? 'pressed' : 'released';
-                    eventDiv.innerHTML = 'Mouse ' + data.button + ' ' + action + ' at (' + data.x + ', ' + data.y + ')';
-                } else if (data.type === 'scroll') {
-                    eventDiv.innerHTML = 'Mouse scrolled at (' + data.x + ', ' + data.y + ') with delta (' + data.dx + ', ' + data.dy + ')';
+                    clickEvent.innerHTML = 'Mouse ' + data.button + ' ' + action + ' at (' + data.x + ', ' + data.y + ')';
                 }
             };
         </script>
