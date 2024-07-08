@@ -162,4 +162,4 @@ cython_debug/
 #.idea/
 
 # Captured images by the webcam
-./images
+images/
