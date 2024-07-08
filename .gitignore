@@ -163,3 +163,5 @@ cython_debug/
 
 # Captured images by the webcam
 images/
+
+database.db
