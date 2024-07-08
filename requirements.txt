@@ -2,3 +2,7 @@ fastapi
 pynput
 uvicorn
 pyserial
+python-dotenv
+requests
+opencv-python
+sqlalchemy
