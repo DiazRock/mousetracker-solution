@@ -3,7 +3,7 @@ import json
 import time
 import requests
 import os
-import dep_container
+import dep_container.common_def as common_def
 from pynput import mouse
 from serial import Serial
 from dotenv import load_dotenv
@@ -14,7 +14,7 @@ load_dotenv()
 
 class DataPoint:
     def __init__(self, data) -> None:
-        self.logger = dep_container.get_logger()
+        self.logger = common_def.get_logger()
         self.logger.info(f"Data to send {data}")
         self._data = data
     
@@ -27,7 +27,7 @@ class MouseListener:
 
     def __init__(self, clients: list) -> None:
         self.clients = clients
-        self.logger = dep_container.get_logger()
+        self.logger = common_def.get_logger()
         self.serial = Serial(os.getenv('SERIAL_PORT'), 9600, timeout = 1)
         pass
 
