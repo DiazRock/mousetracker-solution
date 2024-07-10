@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Make the image directory
+mkdir images
+
 # Install virtualenv using pip
 pip install virtualenv
 
