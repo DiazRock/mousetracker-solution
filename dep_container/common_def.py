@@ -1,14 +1,19 @@
 import logging
-from deviceCommunicators.mouseListener import MouseListener
+from deviceCommunicators.mouseEventTracker import MouseEventTracker
 from deviceCommunicators.imageCapturer import ImageCapturer
 from functools import lru_cache
+from deviceCommunicators.publisher import Publisher
 from repositories.point_and_image_repository import PointAndImageRepository
 from sqlalchemy.orm import Session
 from services.point_and_image_service import PointAndImageService
 
 
-def get_listener(clients):
-    return MouseListener(clients)
+def get_mouse_event_tracker(publisher):
+    return MouseEventTracker(publisher)
+
+
+def get_publisher(clients):
+    return Publisher(clients)
 
 
 def get_image_capturer():
@@ -29,3 +34,4 @@ def get_point_and_image_repository(session: Session):
 
 def get_point_and_image_service(session: Session):
     return PointAndImageService(session)
+
