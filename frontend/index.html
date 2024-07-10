@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>WebSocket Example</title>
+        <title>Mouse Tracker Position</title>
     </head>
     <body>
         <h1>
-            WebSocket Mouse Position
+            Mouse Tracker Position
         </h1>
         <div id="events">
         </div>
@@ -25,11 +25,14 @@
                     console.log("Movement message");
                     const movementDiv = document.getElementById('movementEvent');
                     movementDiv.innerHTML = 'Mouse moved to (' + data.x + ', ' + data.y + ')';
+                    ws.send(JSON.stringify({ x: data.x, y: data.y, event:'mousemove' }));
                 } else if (data.type === 'click') {
                     console.log("Click message");
                     const clickEvent = document.getElementById('clickEvent');
                     const action = data.pressed ? 'pressed' : 'released';
                     clickEvent.innerHTML = 'Mouse ' + data.button + ' ' + action + ' at (' + data.x + ', ' + data.y + ')';
+                    console.log('Sending data via the websocket connection');
+                    ws.send(JSON.stringify({ x: data.x, y: data.y, event: 'lclick' }));
                 }
             };
         </script>
