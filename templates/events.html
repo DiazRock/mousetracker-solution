@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Stored Mouse Events</h1>
+<ul id="stored-events">
+    {% for event in events %}
+    <li>{{ event.image_source }} at ({{ event.x_axis }}, {{ event.y_axis }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}
