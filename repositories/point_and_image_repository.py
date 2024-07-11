@@ -18,5 +18,6 @@ class PointAndImageRepository:
         self.session.refresh(pointAndImage)
         return True
 
-    def get_all(self) -> List[Optional[Point]]:
-        return self.session.query(Point).all()
+    def get_all(self) -> List[Optional[PointAndImage]]:
+        print(self.session.query(PointAndImage).all())
+        return self.session.query(PointAndImage).all()
