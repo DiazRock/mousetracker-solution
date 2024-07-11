@@ -4,26 +4,46 @@ import os
 import dep_container
 import asyncio
 import json
-from fastapi import FastAPI, WebSocket
-from starlette.responses import FileResponse 
+from fastapi import FastAPI, WebSocket, Request
 from schemas.point import Point
 from dotenv import load_dotenv
 from sqlalchemy.orm import Session
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from utils.init_db import create_tables
 
 
 load_dotenv()
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 publisher = dep_container.Publisher([])
 mouseEventTracker = dep_container.get_mouse_event_tracker(publisher)
 imageCapturer = dep_container.get_image_capturer()
 logger = dep_container.get_logger()
+templates = Jinja2Templates(directory="templates")
+
+repository = dep_container.get_point_and_image_service(next(dep_container.get_db()))
 
 
-@app.get("/")
-def get():
+@app.get("/", response_class=HTMLResponse)
+def get(request: Request):
     logger.info("Serving main view page")
-    return FileResponse('./frontend/index.html')
+    return templates.TemplateResponse("base.html", {"request": request})
+
+
+@app.get("/tracker", response_class=HTMLResponse)
+def get(request: Request):
+    logger.info("Serving tracker view page")
+    return templates.TemplateResponse("tracker.html", {"request": request})
+
+
+@app.get("/events", response_class=HTMLResponse)
+def get_points(request: Request):
+    logger.info("Serving events view page")
+    events = repository.get_all()
+    return templates.TemplateResponse("events.html", {"request": request, "events": events})
+
 
 @app.on_event("startup")
 def on_startup() -> None:
