@@ -20,6 +20,8 @@ chmod +=x ./setup.sh
 ./setup.sh
 ```
 
+Then you can navigate in the browser to see the mouse tracker and list the pictures in the taken position
+
 ## Requirements
 
 Python 3.12
