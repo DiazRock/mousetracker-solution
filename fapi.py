@@ -16,12 +16,12 @@ from utils.init_db import create_tables
 
 load_dotenv()
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory=os.getenv('STATIC_FOLDER')), name="static")
 publisher = dep_container.Publisher([])
 mouseEventTracker = dep_container.get_mouse_event_tracker(publisher)
 imageCapturer = dep_container.get_image_capturer()
 logger = dep_container.get_logger()
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=os.getenv('TEMPLATE_FOLDER'))
 
 repository = dep_container.get_point_and_image_service(next(dep_container.get_db()))
 
