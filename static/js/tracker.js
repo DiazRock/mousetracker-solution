@@ -3,10 +3,9 @@ console.log("Connection done!");
 
 ws.onmessage = function(event) {
     console.log("Having a message");
-    const eventDiv = document.getElementById('events');
     const data = JSON.parse(event.data);
     if (data.type === 'move') {
-        console.log("Movement message");
+        //console.log("Movement message");
         const movementDiv = document.getElementById('movementEvent');
         movementDiv.innerHTML = 'Mouse moved to (' + data.x + ', ' + data.y + ')';
         ws.send(JSON.stringify({ x: data.x, y: data.y, event:'mousemove' }));
@@ -16,6 +15,6 @@ ws.onmessage = function(event) {
         const action = data.pressed ? 'pressed' : 'released';
         clickEvent.innerHTML = 'Mouse ' + data.button + ' ' + action + ' at (' + data.x + ', ' + data.y + ')';
         console.log('Sending data via the websocket connection');
-        ws.send(JSON.stringify({ x: data.x, y: data.y, event: 'lclick' }));
+        ws.send(JSON.stringify({ x: data.x, y: data.y, event: 'lclick', action: action }));
     }
 };

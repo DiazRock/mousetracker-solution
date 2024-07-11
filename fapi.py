@@ -75,7 +75,7 @@ async def websocket_endpoint(websocket: WebSocket):
             raw_data = await websocket.receive_text()
             data = json.loads(raw_data)
             logger.info(f"Data received from websocket: {data}")
-            if data['event'] == 'lclick':
+            if data['event'] == 'lclick' and data['action'] == 'pressed':
                 logger.info("Received left click event")
                 db_session = next(dep_container.get_db())
                 await lclick(Point(x=data['x'], y=data['y']), session=db_session)
