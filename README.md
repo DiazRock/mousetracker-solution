@@ -18,6 +18,16 @@ chmod +=x ./setup.sh
 ./setup.sh
 ```
 
+## Checking the information in the database and the pictures source
+In the folder [./images] you will see the pictures.
+There is gonna be a database.db file in the root path of the project.
+Load this folder inside a sqlite console and then run:
+
+```sql
+select * FROM PointAndImage;
+```
+
+
 ## Requirements
 
 Python 3.12
