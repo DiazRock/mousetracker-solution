@@ -3,7 +3,7 @@
 This is a simple web server, that does the following 
 
 1. Track the data from the movement of the mouse, and shows it in the browser
-2. When left clicking, takes a picture with the webcame that stores in the [static/images/] folder, and
+2. When left clicking, takes a picture with the webcame that stores in the [<STATIC_FOLDER>/images/] folder, and
 stores the position of the mouse and the data source of the image in a sql database.
 
 ## How to run it
