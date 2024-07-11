@@ -1,7 +1,10 @@
 #!/usr/bin/bash
 
+# Load local variables
+source .env
+
 # Make the image directory
-mkdir images
+mkdir $STATIC_FOLDER/images
 
 # Install virtualenv using pip
 pip install virtualenv
