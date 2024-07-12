@@ -1,7 +1,9 @@
 #!/usr/bin/bash
 
 # Load local variables
+set -a
 source .env
+set +a
 
 # Make the image directory
 mkdir $STATIC_FOLDER/images
