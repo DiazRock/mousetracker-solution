@@ -6,7 +6,7 @@ source .env
 set +a
 
 # Make the image directory
-mkdir $STATIC_FOLDER/images
+mkdir static/images
 
 # Install virtualenv using pip
 pip install virtualenv
